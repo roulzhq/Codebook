@@ -15,6 +15,15 @@ If you ever used Jupyter notebooks you know that they are just awesome! But I al
 - You can send the notebook around, but then your colleagues and your boss need to run it, install packages and... urgh)
 - It's not nice to present.
 
+Codebook wants to solve those issues by making it easy to use. You know, like it's 2020
+
+## Project Structure
+For now, this repo containts both the UI as well as the backend. The UI is an Angular app, the backend a app written in Go.
+I chose angular because it's easy and go because there is this package [otto](https://github.com/robertkrimen/otto) wich seems to be ideal for the code-execution thing.
+It's also lightweight, fast and can handle a lot websocket connections, and it's awesome!
+
+In a later version it might be a good idea to split the frontend and the backend, but for now let's keep it simple!
+
 ## Roadmap / Tasks
 ### Version 0.1.0
 - [ ] Create a minimal client/UI (web based and online!)
@@ -22,3 +31,18 @@ If you ever used Jupyter notebooks you know that they are just awesome! But I al
   - [ ] code execution
   - [ ] UI connection (websockets?)
 - [ ] Define how codebooks can be exported, imported and saved (json?)
+
+### Version 0.2.0
+- [ ] Support different types of cells:
+  - [ ] Markdown
+  - [ ] JSON
+  - [ ] Javascript object/array view (similar to the chromeium console view)
+- [ ] Add auth/user functionality
+- [ ] Add saving of codebooks in the cloud
+
+### Other ideas
+- Having charts and other visualizations is also a must for a stable version. [Observable HQ](https://observablehq.com/) did an awesome job on that. This might be a lot more complex so I'll leave that for the future.
+- Desktop and mobile apps are good ideas, espesially when someone want's to use Codebook locally only.
+
+### Stuff I don't think is needed (change my mind)
+- Versioning. Codebooks are meant to work with Git or other tools, for now versioning would be very OP
