@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "codebook-f7ab2": {
+      "hosting": {
+        "Codebook": [
+          "codebook-f7ab2"
+        ]
+      }
+    }
+  }
+}
