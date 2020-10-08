@@ -6,7 +6,7 @@ For the first version this will only work for javascript, but it should definite
 
 ## Project status
 I just started to work on this project, so please feel free to help if it sounds interesting to you!
-Later in this readmy, you can find a roadmap for the first fiew versions, as well as some other ideas.
+Later in this readme, you can find a roadmap for the first fiew versions, as well as some other ideas.
 
 ## Motivation
 If you ever used Jupyter notebooks you know that they are just awesome! But I also see some major disadvantages in them:
