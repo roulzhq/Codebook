@@ -46,9 +46,15 @@
 
         transition: 0.2s all ease-in-out;
 
+        border-bottom: 0px solid transparent;
+
         &:hover {
           background-color: $dark-accent;
         }
+      }
+
+      .cb-header-navigation-item-active {
+        border-bottom: 3px solid $primary;
       }
 
       .cb-header-navigation-item-primary {

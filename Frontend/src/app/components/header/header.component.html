@@ -5,8 +5,20 @@
   </div>
 
   <div class="cb-header-navigation">
-    <div class="cb-header-navigation-item" routerLink="dashboard">Dashboard</div>
-    <div class="cb-header-navigation-item" routerLink="codebooks">My Codebooks</div>
-    <div class="cb-header-navigation-item" routerLink="data">My Data</div>
+    <div
+      class="cb-header-navigation-item"
+      routerLinkActive="cb-header-navigation-item-active"
+      routerLink=""
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Dashboard
+    </div>
+    <div
+      class="cb-header-navigation-item"
+      routerLinkActive="cb-header-navigation-item-active"
+      routerLink="codebooks"
+    >
+      My Codebooks
+    </div>
   </div>
 </div>

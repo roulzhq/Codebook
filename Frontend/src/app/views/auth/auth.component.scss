@@ -1,0 +1,35 @@
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
+
+:host {
+  .view {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loginForm {
+      width: 50%;
+      height: 60%;
+
+      background: $light-accent;
+
+      padding: 40px;
+
+      display: flex;
+      flex-flow: column;
+
+      @include box-shadow-2();
+
+      input {
+        display: block;
+        width: 100%;
+      }
+
+      label {
+        color: $dark-accent;
+        margin: 10px 0;
+      }
+    }
+  }
+}

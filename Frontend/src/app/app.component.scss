@@ -12,6 +12,7 @@
 
   #content {
     grid-area: content;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
