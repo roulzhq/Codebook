@@ -10,6 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 // Views
 import { IndexView } from './views/index/index.component';
 import { AboutView } from './views/about/about.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AboutView } from './views/about/about.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
