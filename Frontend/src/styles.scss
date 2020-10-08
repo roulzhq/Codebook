@@ -1,5 +1,6 @@
 @import '~normalize.css';
 @import '~src/variables.scss';
+@import '~src/mixins.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap');
 
@@ -31,6 +32,43 @@ a {
   text-decoration: none;
 }
 
+input {
+  padding: 6px;
+  margin-bottom: 2px;
+
+  background: $light;
+  color: $dark;
+
+  border: none;
+  outline: none;
+  border-bottom: 1px solid $primary;
+  
+  @include transition();
+  
+  &:focus {
+    border-bottom: 3px solid $primary;
+    margin-bottom: 0;
+  }
+}
+
+button[type=submit] {
+  color: $light;
+  background: $primary;
+  padding: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  
+  @include transition();
+
+  &:disabled {
+    color: $grey;
+    background: $primary-disabled;
+
+    cursor: not-allowed;
+  }
+}
+
 /*
   Global classes!
 */
@@ -38,4 +76,28 @@ a {
 // Used for the top-level class of every view
 .view {
   padding: 20px;
+}
+
+/*
+  color classes etc.
+*/
+
+.text-success {
+  color: $success;
+}
+
+.text-warning {
+  color: $warning;
+}
+
+.text-error {
+  color: $error;
+}
+
+.text-primary {
+  color: $primary;
+}
+
+.text-secondary {
+  color: $secondary;
 }
