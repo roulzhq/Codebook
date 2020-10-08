@@ -1,0 +1,16 @@
+:host {
+  #app {
+    display: grid;
+    grid-template-areas: 'header' 'content';
+    grid-template-rows: 60px auto;
+    height: 100%;
+  }
+
+  cb-header {
+    grid-area: header;
+  }
+
+  .content {
+    grid-area: content;
+  }
+}
