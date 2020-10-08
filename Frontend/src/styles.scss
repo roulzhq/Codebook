@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~normalize.css';
+@import '~src/variables.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap');
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: $light;
+  color: $dark;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+}
+
+/*
+  Global element styles
+*/
+*[ng-reflect-router-link] {
+  outline: none;
+  cursor: pointer;
+}
+
+a {
+  color: $link;
+  text-decoration: none;
+}
