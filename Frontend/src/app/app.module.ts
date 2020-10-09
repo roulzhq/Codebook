@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgModule } from '@angular/core';
@@ -6,6 +7,8 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +24,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CodebookView } from './views/codebook/codebook.component';
 import { CodebookListView } from './views/codebook-list/codebook-list.component';
 import { AuthView } from './views/auth/auth.component';
+
+/*
+  Configurations
+*/
+
+const toastrOptions = {
+  timeOut: 3000,
+  positionClass: 'toast-bottom-right',
+  preventDuplicates: true,
+};
 
 @NgModule({
   declarations: [
@@ -41,6 +54,8 @@ import { AuthView } from './views/auth/auth.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(toastrOptions),
   ],
   providers: [],
   bootstrap: [AppComponent],
