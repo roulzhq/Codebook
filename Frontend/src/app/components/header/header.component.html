@@ -4,7 +4,7 @@
     <span class="cb-header-title-badge">Alpha</span>
   </div>
 
-  <div class="cb-header-navigation">
+  <div class="cb-header-navigation" *ngIf="loggedIn">
     <div
       class="cb-header-navigation-item"
       routerLinkActive="cb-header-navigation-item-active"
@@ -13,12 +13,26 @@
     >
       Dashboard
     </div>
+
     <div
       class="cb-header-navigation-item"
       routerLinkActive="cb-header-navigation-item-active"
       routerLink="codebooks"
     >
       My Codebooks
+    </div>
+
+    <div class="cb-header-navigation-item cb-header-user">
+      <fa-icon [icon]="faUser"></fa-icon>
+
+      <div class="cb-header-user-dropdown">
+        <div class="cb-header-user-dropdown-item">
+          <span>Account</span> <fa-icon [icon]="faCogs"></fa-icon>
+        </div>
+        <div class="cb-header-user-dropdown-item" (click)="logout()">
+          <span>Logout</span> <fa-icon [icon]="faSignOutAlt"></fa-icon>
+        </div>
+      </div>
     </div>
   </div>
 </div>

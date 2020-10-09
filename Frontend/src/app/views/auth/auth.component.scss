@@ -9,8 +9,10 @@
     align-items: center;
 
     .loginForm {
-      width: 50%;
+      width: 30%;
       height: 60%;
+
+      position: relative;
 
       background: $light-accent;
 
@@ -18,8 +20,15 @@
 
       display: flex;
       flex-flow: column;
+      text-align: center;
+
+      border-radius: 4px;
 
       @include box-shadow-2();
+
+      h1 {
+        margin: 0 0 40px 0;
+      }
 
       input {
         display: block;
@@ -29,6 +38,11 @@
       label {
         color: $dark-accent;
         margin: 10px 0;
+        text-align: left;
+      }
+
+      button {
+        margin-top: 40px;
       }
     }
   }

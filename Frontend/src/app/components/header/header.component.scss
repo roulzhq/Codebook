@@ -68,6 +68,45 @@
           background-color: $primary-accent;
         }
       }
+
+      .cb-header-user {
+        position: relative;
+        margin-left: 40px;
+
+        .cb-header-user-dropdown {
+          display: none;
+          opacity: 0;
+          position: fixed;
+          width: 160px;
+
+          top: 60px;
+          right: 20px;
+
+          background-color: $dark;
+
+          @include box-shadow-2();
+          
+          .cb-header-user-dropdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 6px 10px 20px;
+            white-space: nowrap;
+            border-left: 0px solid transparent;
+
+            @include transition();
+
+            &:hover {
+              background-color: $dark-accent;
+              border-left: 3px solid $primary;
+            }
+          }
+        }
+
+        &:hover .cb-header-user-dropdown {
+          display: block;
+          opacity: 1;
+        }
+      }
     }
   }
 }
