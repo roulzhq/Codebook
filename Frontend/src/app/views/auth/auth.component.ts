@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 
+import { FirebaseError } from 'firebase';
+
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -42,14 +44,23 @@ export class AuthView implements OnInit {
 
     this.loggingIn = true;
 
-    let res = await this.authService.loginWithEmailAndPassword(
-      form.email,
-      form.password
-    );
+    try {
+      let res = await this.authService.loginWithEmailAndPassword(
+        form.email,
+        form.password
+      );
 
-    if (res) {
-      this.router.navigateByUrl('');
-      this.loggingIn = false;
+      if (res) {
+        this.router.navigateByUrl('');
+        this.loggingIn = false;
+      }
+    } catch (_err) {
+      // Typescript does not let us type the error inside the catch.
+      // Called _err to make it clear not to use this one.
+      let error = _err as FirebaseError;
+
+      this.toastr.error('Please try again!', 'Login unsuccessfull.');
+      this.loginForm.reset();
     }
   }
 }
