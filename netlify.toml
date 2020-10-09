@@ -1,4 +1,10 @@
 [build]
 base = "Frontend"
-publish = "dist/Codebook"
 command = "npm run build"
+publish = "dist/Codebook"
+
+[[redirects]]
+force = false
+from = "/* "
+status = 200
+to = "/index.html"
