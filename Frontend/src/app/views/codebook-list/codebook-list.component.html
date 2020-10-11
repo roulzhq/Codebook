@@ -1,1 +1,11 @@
-<p>codebook-list works!</p>
+<div class="view">
+  <div class="codebook-list">
+    <div
+      class="codebook"
+      *ngFor="let codebook of codebooks | async"
+      [routerLink]="['/codebooks/', codebook.id]"
+    >
+      <div class="codebook-title">{{ codebook.title }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+@import '~src/variables';
+@import '~src/mixins';
+
+:host {
+  .view {
+    .codebook-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-auto-rows: minmax(200px, 1fr);
+      grid-gap: 20px;
+
+      .codebook {
+        height: 100%;
+        width: 100%;
+
+        padding: 10px;
+
+        background-color: $light-accent;
+        cursor: pointer;
+
+        @include box-shadow-1();
+        @include transition();
+
+        .codebook-title {
+          color: $primary;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+        }
+
+        &:hover {
+          @include box-shadow-2();
+        }
+      }
+    }
+  }
+}

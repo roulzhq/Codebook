@@ -25,14 +25,14 @@ const routes: Routes = [
   },
 
   {
-    path: 'codebook/:id',
-    component: CodebookView,
+    path: 'codebooks',
+    component: CodebookListView,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToAuth },
   },
   {
-    path: 'codebooks',
-    component: CodebookListView,
+    path: 'codebooks/:id',
+    component: CodebookView,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToAuth },
   },
