@@ -1,0 +1,19 @@
+@import '~src/variables';
+
+:host {
+  .view {
+    .codebook {
+      .codebook-head {
+        .codebook-title {
+          margin: 0;
+        }
+      }
+
+      .codebook-content {
+        .codebook-cells {
+          border: 1px dotted $primary;
+        }
+      }
+    }
+  }
+}

@@ -11,9 +11,7 @@ import { CodebookService } from '../../services/codebook.service';
 export class CodebookListView implements OnInit {
   public codebooks = this.codebookService.codebooks;
 
-  constructor(public codebookService: CodebookService) {
-    this.codebooks.pipe(take(1)).subscribe(codebooks => console.log(codebooks))
-  }
+  constructor(public codebookService: CodebookService) {}
 
   ngOnInit(): void {}
 }

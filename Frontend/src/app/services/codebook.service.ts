@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
@@ -33,5 +31,13 @@ export class CodebookService {
     return this.codebooks.pipe(
       map((codebooks) => codebooks.find((i) => i.id === codebookId))
     );
+  }
+
+  public getCodebookCellsObservable(codebookId: string): Observable<cb.Cell[]> {
+    const codebookDoc = this.firestore.doc(`Codebooks/${codebookId}`);
+
+    if (codebookDoc) {
+      return codebookDoc.collection<cb.Cell>('cells').valueChanges();
+    }
   }
 }

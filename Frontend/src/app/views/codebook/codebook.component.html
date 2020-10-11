@@ -1,5 +1,17 @@
 <div class="view">
-  <div class="codebook">
-    {{ codebook | async | json }}
+  <div class="codebook" *ngIf="codebook$ | async as codebook">
+    <div class="codebook-head">
+      <h1 class="codebook-title">
+        {{ codebook.title }}
+      </h1>
+    </div>
+    <div class="codebook-content">
+      <div class="codebook-cells">
+        <codebook-cell
+          *ngFor="let cell of cells$ | async"
+          [data]="cell"
+        ></codebook-cell>
+      </div>
+    </div>
   </div>
 </div>

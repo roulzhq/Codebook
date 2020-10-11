@@ -1,0 +1,16 @@
+@import '~src/variables';
+
+:host {
+  .cell {
+    margin: 2px;
+    border: 1px solid black;
+    padding: 10px;
+
+    .lines {
+      .line {
+        background-color: $primary;
+        margin: 2px;
+      }
+    }
+  }
+}

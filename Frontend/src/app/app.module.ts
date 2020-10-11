@@ -24,6 +24,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CodebookView } from './views/codebook/codebook.component';
 import { CodebookListView } from './views/codebook-list/codebook-list.component';
 import { AuthView } from './views/auth/auth.component';
+import { CodebookCellComponent } from './components/codebook-cell/codebook-cell.component';
 
 /*
   Configurations
@@ -45,6 +46,7 @@ const toastrOptions = {
     CodebookView,
     CodebookListView,
     AuthView,
+    CodebookCellComponent,
   ],
   imports: [
     BrowserModule,

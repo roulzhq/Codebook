@@ -12,7 +12,8 @@ import { Codebook as cb } from '../../models/Codebook';
   styleUrls: ['./codebook.component.scss'],
 })
 export class CodebookView implements OnInit, OnDestroy {
-  public codebook: Observable<cb.Codebook>;
+  public codebook$: Observable<cb.Codebook>;
+  public cells$: Observable<cb.Cell[]>;
 
   private routeParamsSubscription: Subscription;
 
@@ -27,7 +28,8 @@ export class CodebookView implements OnInit, OnDestroy {
     this.routeParamsSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
 
-      this.codebook = this.codebookService.getCodebookAsObservable(id);
+      this.codebook$ = this.codebookService.getCodebookAsObservable(id);
+      this.cells$ = this.codebookService.getCodebookCellsObservable(id);
     });
   }
 
