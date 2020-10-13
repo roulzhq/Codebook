@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { take, takeWhile } from 'rxjs/operators';
 import { CodebookService } from 'src/app/services/codebook.service';
 
 import { Codebook as cb } from '../../models/Codebook';
@@ -33,5 +33,7 @@ export class CodebookView implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cells$.pipe(take(3)).subscribe((cells) => console.log(cells));
+  }
 }
