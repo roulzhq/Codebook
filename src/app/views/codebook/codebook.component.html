@@ -10,6 +10,7 @@
         <codebook-cell
           *ngFor="let cell of cells$ | async"
           [data]="cell"
+          (dataChange)="onCellDataChanged($event, cell.id)"
         ></codebook-cell>
       </div>
     </div>

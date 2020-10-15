@@ -2,7 +2,8 @@
   <div class="lines">
     <ngx-monaco-editor
       [options]="editorOptions"
-      [(ngModel)]="content"
+      [(ngModel)]="cellContent"
+      (ngModelChange)="onCellContentChanged($event)"
     ></ngx-monaco-editor>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Codebook as cb } from '../../models/Codebook';
 
@@ -8,15 +8,34 @@ import { Codebook as cb } from '../../models/Codebook';
   styleUrls: ['./codebook-cell.component.scss'],
 })
 export class CodebookCellComponent implements OnInit {
-  @Input('data') cell: cb.Cell = null;
+  @Input() data: cb.Cell = null;
+  @Output() dataChange: EventEmitter<cb.Cell> = new EventEmitter<
+    cb.Cell
+  >();
 
-  public content: string = '';
+  public cellContent: string = '';
 
-  public editorOptions = { theme: 'vs-dark', language: 'javascript' };
+  private _editorOptions: any = {};
 
-  constructor() {}
+  constructor() {
+    this._editorOptions.theme = 'vs';
+    this._editorOptions.language = this.data?.type || 'text';
+  }
 
   ngOnInit(): void {
-    this.content = this.cell.lines.join('\n ');
+    this.cellContent = this.data?.lines.join('\n');
+  }
+
+  public get editorOptions() {
+    return this._editorOptions;
+  }
+
+  public onCellContentChanged(content: string) {
+    const lines = content.split('\n');
+
+    this.dataChange.emit({
+      ...this.data,
+      lines,
+    });
   }
 }

@@ -37,7 +37,25 @@ export class CodebookService {
     const codebookDoc = this.firestore.doc(`Codebooks/${codebookId}`);
 
     if (codebookDoc) {
-      return codebookDoc.collection<cb.Cell>('cells').valueChanges();
+      return codebookDoc.collection<cb.Cell>('cells').valueChanges({ idField: 'id' });
+    }
+  }
+
+  public updateCodebookCell(codebookId: string, cellId: string, cell: cb.Cell) {
+    if (!codebookId && !cellId) {
+      return null;
+    }
+    console.log(codebookId);
+    console.log(cellId);
+    console.log(cell);
+
+    const codebookDoc = this.firestore.doc(`Codebooks/${codebookId}`);
+    const cellDoc = codebookDoc.collection(`cells`).doc(cellId);
+
+    if (cellDoc) {
+      cellDoc.update({
+        lines: cell.lines,
+      });
     }
   }
 }

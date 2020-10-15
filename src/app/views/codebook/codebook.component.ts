@@ -15,6 +15,8 @@ export class CodebookView implements OnInit, OnDestroy {
   public codebook$: Observable<cb.Codebook>;
   public cells$: Observable<cb.Cell[]>;
 
+  public codebookId: string;
+
   private routeParamsSubscription: Subscription;
 
   public ngOnDestroy(): void {
@@ -31,9 +33,17 @@ export class CodebookView implements OnInit, OnDestroy {
       this.codebook$ = this.codebookService.getCodebookAsObservable(id);
       this.cells$ = this.codebookService.getCodebookCellsObservable(id);
     });
+
+    this.codebook$.pipe(take(1)).subscribe((codebook) => {
+      this.codebookId = codebook.id;
+    });
   }
 
   ngOnInit(): void {
     this.cells$.pipe(take(3)).subscribe((cells) => console.log(cells));
+  }
+
+  public onCellDataChanged(newCell: cb.Cell, cellId: string) {
+    this.codebookService.updateCodebookCell(this.codebookId, cellId, newCell);
   }
 }
