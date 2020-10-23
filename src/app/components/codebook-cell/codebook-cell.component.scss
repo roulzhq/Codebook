@@ -1,10 +1,31 @@
 @import '~src/variables';
+@import '~src/mixins';
 
 :host {
   .cell {
-    margin: 2px;
-    border: 1px solid black;
-    padding: 10px;
+    margin: 10px 0;
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: auto 200px;
+    background: $light-accent;
+
+    border-bottom: 2px solid $success;
+
+    @include transition();
+    @include box-shadow-1();
+
+    .cell-main {
+      .cell-input {
+      }
+      .cell-output {
+      }
+    }
+
+    .cell-controls {
+      button {
+        display: block;
+      }
+    }
 
     .lines {
       .line {
@@ -12,5 +33,9 @@
         margin: 2px;
       }
     }
+  }
+
+  .unsavedChangesBorder {
+    border-bottom: 2px solid $error;
   }
 }

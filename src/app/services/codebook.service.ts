@@ -39,13 +39,12 @@ export class CodebookService {
     if (codebookDoc) {
       return codebookDoc
         .collection<cb.Cell>('cells')
-        .valueChanges({ idField: 'id' });
+        .valueChanges({ idField: 'id' })
+        .pipe(distinctUntilChanged(), shareReplay());
     }
   }
 
   public updateCodebookCell(codebookId: string, cellId: string, cell: cb.Cell) {
-    console.log("Update codebook cell");
-    
     if (!codebookId && !cellId) {
       return null;
     }
