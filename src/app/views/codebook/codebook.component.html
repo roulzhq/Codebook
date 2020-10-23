@@ -8,7 +8,7 @@
     <div class="codebook-content">
       <div class="codebook-cells">
         <codebook-cell
-          *ngFor="let cell of cells$ | async"
+          *ngFor="let cell of cells$ | async; trackBy: codebookTrackByFunction"
           [data]="cell"
           (dataChange)="onCellDataChanged($event, cell.id)"
         ></codebook-cell>

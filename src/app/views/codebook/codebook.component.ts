@@ -46,4 +46,13 @@ export class CodebookView implements OnInit, OnDestroy {
   public onCellDataChanged(newCell: cb.Cell, cellId: string) {
     this.codebookService.updateCodebookCell(this.codebookId, cellId, newCell);
   }
+
+  /**
+   * This function is used to help angular track changes in the cell loop.
+   * It's not a big performance boost, but it prevents the cells from being re-rendered.
+   * That is needed to let the cursor stay at it's place inside the monaco editor.
+   */
+  public codebookTrackByFunction(index, item) {
+    return item ? item.id : undefined;
+  }
 }
