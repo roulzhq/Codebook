@@ -26,7 +26,7 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
       this.cell = cellCopy;
       this.originalCell = data;
 
-      this.pendingChanges = false;      
+      this.pendingChanges = false;
     }
   }
 
@@ -61,7 +61,7 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
       enabled: false,
     },
     theme: 'vs',
-    language: this.data?.type || 'text',
+    language: 'javascript', // this.data?.type || 'text',
     automaticLayout: true,
   };
 
@@ -108,11 +108,11 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
   public onCellResize(event: ResizedEvent) {
     // Trigger only if there was an "oldHeight".
     // Used to prevent this function from being called when the cells are not properly rendered yet.
-    if(event.oldHeight) {
-      if (event.newHeight != event.oldHeight) {      
+    if (event.oldHeight) {
+      if (event.newHeight != event.oldHeight) {
         window.dispatchEvent(new Event('resize'));
         this.cell.height = event.newHeight;
-        
+
         this.registerCellChange();
       }
     }
