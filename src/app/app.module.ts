@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 
 // Modules
 import { CodebookModule } from './codebook/codebook.module';
+import { SharedModule } from './shared/shared.module';
 
 // App components
 import { HeaderComponent } from './components/header/header.component';
@@ -25,7 +26,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { IndexView } from './views/index/index.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthView } from './views/auth/auth.component';
-import { ButtonComponent } from './shared/button/button.component';
 
 /*
   Configurations
@@ -45,7 +45,6 @@ const toastrOptions = {
     // Views
     IndexView,
     AuthView,
-    ButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +53,7 @@ const toastrOptions = {
     AppRoutingModule,
 
     CodebookModule,
+    SharedModule,
 
     FontAwesomeModule,
     AngularFireModule.initializeApp(environment.firebase),
