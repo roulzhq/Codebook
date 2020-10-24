@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CodebookService } from 'src/app/services/codebook.service';
 
 @Component({
-  selector: 'app-codebook-list',
+  selector: 'codebook-list',
   templateUrl: './codebook-list.component.html',
   styleUrls: ['./codebook-list.component.scss'],
 })

@@ -1,21 +1,13 @@
 <div class="cell" [class.unsavedChangesBorder]="pendingChanges">
-    <div class="cell-main">
-      <div class="cell-input">
-        <ngx-monaco-editor
-          [options]="editorOptions"
-          [ngModel]="cellContent"
-          (ngModelChange)="onCellContentChanged($event)"
-        ></ngx-monaco-editor>
-      </div>
-    
-      <div class="cell-output">
-        Output:
-      </div>
-    </div>
-    <div class="cell-controls">
-      <button>execute</button>
-      <button>delete</button>
-      <button>something else</button>
-    </div>
+  <div class="cell-input" [style.height.px]="cell.height" (resized)="onCellResize($event)">
+    <ngx-monaco-editor
+      [options]="editorOptions"
+      [ngModel]="cellContent"
+      (ngModelChange)="onCellContentChanged($event)"
+      class="cell-input-editor"
+      [style.height.px]="cell.height"
+    ></ngx-monaco-editor>
   </div>
-  
+
+  <div class="cell-output">Output:</div>
+</div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
+import { distinctUntilChanged, map, shareReplay, tap } from 'rxjs/operators';
 
 import { Codebook as cb } from '../models/Codebook';
 import { AuthService } from './auth.service';
@@ -11,6 +11,10 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class CodebookService {
+  /**
+   * All the users codebooks, without cells and other subcollections.
+   * Those must be fetched when needed
+   */
   public readonly codebooks: Observable<cb.Codebook[]>;
 
   constructor(
@@ -53,9 +57,7 @@ export class CodebookService {
     const cellDoc = codebookDoc.collection(`cells`).doc(cellId);
 
     if (cellDoc) {
-      cellDoc.update({
-        lines: cell.lines,
-      });
+      cellDoc.update(cell);
     }
   }
 }

@@ -7,7 +7,7 @@ import { CodebookService } from 'src/app/services/codebook.service';
 import { Codebook as cb } from '../../../models/Codebook';
 
 @Component({
-  selector: 'app-codebook-detail',
+  selector: 'codebook-detail',
   templateUrl: './codebook-detail.component.html',
   styleUrls: ['./codebook-detail.component.scss']
 })

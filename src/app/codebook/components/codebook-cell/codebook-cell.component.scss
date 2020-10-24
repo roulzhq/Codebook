@@ -6,36 +6,34 @@
     margin: 10px 0;
     display: grid;
     grid-column-gap: 10px;
-    grid-template-columns: auto 200px;
+    grid-template-rows: auto auto;
     background: $light-accent;
 
-    border-bottom: 2px solid $success;
+    border-left: 2px solid $success;
 
     @include transition();
     @include box-shadow-1();
 
-    .cell-main {
-      .cell-input {
-      }
-      .cell-output {
+    .cell-input {
+      position: relative;
+
+      min-height: 100px;
+      max-height: 300px;
+      overflow: hidden;
+      resize: vertical;
+
+      padding-bottom: 10px;
+
+      .cell-input-editor {
+        height: 100%;
       }
     }
 
-    .cell-controls {
-      button {
-        display: block;
-      }
-    }
-
-    .lines {
-      .line {
-        background-color: $primary;
-        margin: 2px;
-      }
+    .cell-output {
     }
   }
 
   .unsavedChangesBorder {
-    border-bottom: 2px solid $error;
+    border-left: 2px solid $error;
   }
 }

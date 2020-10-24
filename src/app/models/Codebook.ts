@@ -8,7 +8,7 @@ export namespace Codebook {
     authorId: string;
     authorName: string;
     metadata: Metadata;
-    cells: Cell[];
+    cells?: Cell[]; // Optional, as they are fetched seperately for the app
   }
 
   /**
@@ -19,6 +19,7 @@ export namespace Codebook {
     type: CellType;
     lines?: string[];
     data?: string;
+    height?: number;
   }
 
   /**
