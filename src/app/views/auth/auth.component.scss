@@ -46,4 +46,20 @@
       }
     }
   }
+
+  @media screen and (max-width: 1145px) {
+    .view {
+      .loginForm {
+        width: 60%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .view {
+      .loginForm {
+        width: 90%;
+      }
+    }
+  }
 }
