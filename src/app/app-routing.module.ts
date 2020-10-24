@@ -8,8 +8,8 @@ import {
 
 // Views
 import { IndexView } from './views/index/index.component';
-import { CodebookListView } from './views/codebook-list/codebook-list.component';
-import { CodebookView } from './views/codebook/codebook.component';
+import { CodebookListComponent } from './codebook/views/codebook-list/codebook-list.component';
+import { CodebookDetailComponent } from './codebook/views/codebook-detail/codebook-detail.component';
 import { AuthView } from './views/auth/auth.component';
 
 const redirectUnauthorizedToAuth = () => redirectUnauthorizedTo(['auth']);
@@ -26,17 +26,16 @@ const routes: Routes = [
 
   {
     path: 'codebooks',
-    component: CodebookListView,
+    component: CodebookListComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToAuth },
   },
   {
     path: 'codebooks/:id',
-    component: CodebookView,
+    component: CodebookDetailComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToAuth },
   },
-
   {
     path: 'auth',
     component: AuthView,

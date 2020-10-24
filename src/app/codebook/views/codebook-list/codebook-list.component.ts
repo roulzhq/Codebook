@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { take } from 'rxjs/operators';
 
-import { CodebookService } from '../../services/codebook.service';
+import { CodebookService } from 'src/app/services/codebook.service';
 
 @Component({
-  selector: 'codebook-list-view',
+  selector: 'app-codebook-list',
   templateUrl: './codebook-list.component.html',
   styleUrls: ['./codebook-list.component.scss'],
 })
-export class CodebookListView implements OnInit {
+export class CodebookListComponent implements OnInit {
   public codebooks = this.codebookService.codebooks;
 
   constructor(public codebookService: CodebookService) {}

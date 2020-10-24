@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { take, takeWhile } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { CodebookService } from 'src/app/services/codebook.service';
 
-import { Codebook as cb } from '../../models/Codebook';
+import { Codebook as cb } from '../../../models/Codebook';
 
 @Component({
-  selector: 'codebook-view',
-  templateUrl: './codebook.component.html',
-  styleUrls: ['./codebook.component.scss'],
+  selector: 'app-codebook-detail',
+  templateUrl: './codebook-detail.component.html',
+  styleUrls: ['./codebook-detail.component.scss']
 })
-export class CodebookView implements OnInit, OnDestroy {
+export class CodebookDetailComponent implements OnInit {
   public codebook$: Observable<cb.Codebook>;
   public cells$: Observable<cb.Cell[]>;
 

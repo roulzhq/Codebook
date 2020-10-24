@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CodebookListView } from './codebook-list.component';
+import { CodebookDetailComponent } from './codebook-detail.component';
 
-describe('CodebookListView', () => {
-  let component: CodebookListView;
-  let fixture: ComponentFixture<CodebookListView>;
+describe('CodebookDetailComponent', () => {
+  let component: CodebookDetailComponent;
+  let fixture: ComponentFixture<CodebookDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CodebookListView ]
+      declarations: [ CodebookDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CodebookListView);
+    fixture = TestBed.createComponent(CodebookDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

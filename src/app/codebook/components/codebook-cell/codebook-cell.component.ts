@@ -6,12 +6,11 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 
-import { UtilService } from '../../services/util.service';
+import { UtilService } from '../../../services/util.service';
 
-import { Codebook as cb } from '../../models/Codebook';
+import { Codebook as cb } from '../../../models/Codebook';
 
 @Component({
   selector: 'codebook-cell',
