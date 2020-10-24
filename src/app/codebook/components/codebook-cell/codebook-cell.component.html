@@ -5,7 +5,7 @@
       [ngModel]="cellContent"
       (ngModelChange)="onCellContentChanged($event)"
       class="cell-input-editor"
-      [style.height.px]="cell.height"
+      [style.height.px]="cell.height - 10"
     ></ngx-monaco-editor>
   </div>
 
