@@ -1,5 +1,9 @@
 <div class="cell" [class.unsavedChangesBorder]="pendingChanges">
-  <div class="cell-input" [style.height.px]="cell.height" (resized)="onCellResize($event)">
+  <div
+    class="cell-input"
+    [style.height.px]="cell.height"
+    (resized)="onCellResize($event)"
+  >
     <ngx-monaco-editor
       [options]="editorOptions"
       [ngModel]="cellContent"
@@ -9,5 +13,7 @@
     ></ngx-monaco-editor>
   </div>
 
-  <div class="cell-output">Output:</div>
+  <div class="cell-output">
+    {{ output || "..."}}
+  </div>
 </div>

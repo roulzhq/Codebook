@@ -7,9 +7,10 @@ import {
   Output,
 } from '@angular/core';
 
-import { UtilService } from '../../../services/util.service';
+import { UtilService } from 'src/app/services/util.service';
+import { WasmService } from 'src/app/services/wasm.service';
 
-import { Codebook as cb } from '../../../models/Codebook';
+import { Codebook as cb } from 'src/app/models/Codebook';
 import { ResizedEvent } from 'angular-resize-event';
 
 @Component({
@@ -42,16 +43,20 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
 
   // The interval ID for the changes listener. Used to clear the interval on component destroy
   private saveChangesInterval: number;
+  // The interval ID for the execution listener.
+  private executionInterval: number;
 
   // A threshold used to determine if the "save" function should be executed.
   // If the distance since the last edit and the time when the save function was executed is below
   // this threshold, the save function will not be executed.
   private editThreshold: number = 1000;
   // How often the save function should be called automatically.
-  private editInterval: number = 2000;
+  private editTimer: number = 2000;
+  // How often the cell content is executed
+  public executeTimer: number = 500;
+
   // This stores the time of the last edit
   private lastEdit: number = null;
-
   // True if there are unsaved changes, false otherwise.
   public pendingChanges: boolean = false;
 
@@ -65,22 +70,39 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
     automaticLayout: true,
   };
 
-  constructor(private utilService: UtilService) {}
+  // The executed cell output
+  public output: string = null;
+
+  constructor(private utilService: UtilService, private wasm: WasmService) {}
 
   public ngOnInit(): void {
-    this.saveChangesInterval = setInterval(
-      this.saveChanges.bind(this),
-      this.editInterval
-    );
+    this.execute();
+    
+    this.saveChangesInterval = setInterval(() => {
+      if (this.cellChanged) {
+        this.saveChanges();
+      }
+    }, this.editTimer);
+
+    this.executionInterval = setInterval(() => {
+      if (this.cellChanged) {
+        this.execute();
+      }
+    }, this.executeTimer);
   }
 
   public ngOnDestroy(): void {
     clearInterval(this.saveChangesInterval);
+    clearInterval(this.executionInterval);
   }
 
   // Getter functions
   public get cellContent(): string {
     return this.cell.lines.join('\n');
+  }
+
+  public get cellChanged(): boolean {
+    return !this.utilService.compareObjects(this.originalCell, this.cell);
   }
 
   /**
@@ -130,12 +152,17 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
     // The data is not saved if the time difference is smaller then the threshold
     // To avoid saving the data while the user is still typing something.
     if (timeDifference > this.editThreshold || this.lastEdit == null) {
-      // Only perform saving if there are changes.
-      if (!this.utilService.compareObjects(this.originalCell, this.cell)) {
-        // If so, update the data.
-        this.dataChange.emit(this.cell);
-        console.log('Saving changes...');
-      }
+      // If so, update the data.
+      this.dataChange.emit(this.cell);
+      console.log('Saving changes...');
     }
+  }
+
+  public execute() {
+    this.wasm.run().then((res) => {
+      this.wasm.go.run(res.instance);
+
+      this.output = cb_execute(this.cellContent);
+    });
   }
 }
