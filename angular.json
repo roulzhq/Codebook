@@ -33,7 +33,9 @@
               }
             ],
             "styles": ["src/styles.scss"],
-            "scripts": [],
+            "scripts": [
+              "src/assets/wasm_exec.js"
+            ],
             "allowedCommonJsDependencies": [
               "@firebase/firestore",
               "@firebase/auth",
