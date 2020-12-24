@@ -12,6 +12,7 @@ import { WasmService } from 'src/app/services/wasm.service';
 
 import { Codebook as cb } from 'src/app/models/Codebook';
 import { ResizedEvent } from 'angular-resize-event';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'codebook-cell',
@@ -76,8 +77,12 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
   constructor(private utilService: UtilService, private wasm: WasmService) {}
 
   public ngOnInit(): void {
-    this.execute();
-    
+    this.wasm.ready.pipe(take(2)).subscribe((ready) => {
+      if (ready) {
+        this.execute();
+      }
+    });
+
     this.saveChangesInterval = setInterval(() => {
       if (this.cellChanged) {
         this.saveChanges();
@@ -159,10 +164,6 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
   }
 
   public execute() {
-    this.wasm.run().then((res) => {
-      this.wasm.go.run(res.instance);
-
-      this.output = cb_execute(this.cellContent);
-    });
+    this.output = this.wasm.execute(this.cellContent);
   }
 }
