@@ -25,20 +25,7 @@ It's also lightweight, fast and can handle a lot websocket connections, and it's
 In a later version it might be a good idea to split the frontend and the backend, but for now let's keep it simple!
 
 ## Roadmap / Tasks
-### Version 0.1.0
-- [ ] Create a minimal client/UI (web based and online!)
-- [ ] Implement the backend
-  - [ ] code execution
-  - [ ] UI connection (websockets?)
-- [ ] Define how codebooks can be exported, imported and saved (json?)
-
-### Version 0.2.0
-- [ ] Support different types of cells:
-  - [ ] Markdown
-  - [ ] JSON
-  - [ ] Javascript object/array view (similar to the chromeium console view)
-- [ ] Add auth/user functionality
-- [ ] Add saving of codebooks in the cloud
+Can be found on github under the project page. There are some milestones and issues are actively maintained.
 
 ### Other ideas
 - Having charts and other visualizations is also a must for a stable version. [Observable HQ](https://observablehq.com/) did an awesome job on that. This might be a lot more complex so I'll leave that for the future.
