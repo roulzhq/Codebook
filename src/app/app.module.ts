@@ -31,12 +31,6 @@ import { AuthView } from './views/auth/auth.component';
   Configurations
 */
 
-const toastrOptions = {
-  timeOut: 3000,
-  positionClass: 'toast-bottom-right',
-  preventDuplicates: true,
-};
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +54,6 @@ const toastrOptions = {
     AngularFirestoreModule,
     AngularFireAuthModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(toastrOptions),
   ],
   providers: [],
   bootstrap: [AppComponent],

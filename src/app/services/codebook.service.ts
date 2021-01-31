@@ -60,4 +60,16 @@ export class CodebookService {
       cellDoc.update(cell);
     }
   }
+
+  public updateCodebookTitle(codebookId: string, title: string) {
+    if (!codebookId && !title) {
+      return null;
+    }
+
+    const codebookDoc = this.firestore.doc(`Codebooks/${codebookId}`);
+
+    if (codebookDoc) {
+      codebookDoc.update({ title });
+    }
+  }
 }

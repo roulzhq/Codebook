@@ -7,7 +7,7 @@ import { WasmSuite, ExecuteCellFunction } from '../models/WASM';
   providedIn: 'root',
 })
 export class WasmService {
-  public Suite: WasmSuite;
+  private Suite: WasmSuite;
 
   public ready: BehaviorSubject<boolean> = new BehaviorSubject(false);
 

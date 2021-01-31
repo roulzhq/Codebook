@@ -3,15 +3,45 @@
 :host {
   .view {
     .codebook {
+      display: grid;
+      grid-template-columns: 160px auto;
+      grid-template-rows: 42px auto;
+      grid-gap: 16px;
+      grid-template-areas: '. head' 'sidemenu content';
+      height: 100%;
+
+      .sidemenu {
+        grid-area: sidemenu;
+      }
+
       .codebook-head {
+        grid-area: head;
+
         .codebook-title {
-          margin: 0 0 40px 0;
+          margin: 0;
+
+          .codebook-title-editButton {
+            cursor: pointer;
+            color: $dark-accent;
+            font-size: 16px;
+            vertical-align: top;
+          }
         }
       }
 
       .codebook-content {
+        grid-area: content;
+        overflow-y: auto;
+
         .codebook-cells {
-          
+          .codebook-cell {
+            margin: 16px 0;
+            display: block;
+          }
+
+          .codebook-cell:first-of-type {
+            margin-top: 0px;
+          }
         }
       }
     }

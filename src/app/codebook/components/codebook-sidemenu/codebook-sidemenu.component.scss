@@ -1,0 +1,40 @@
+@import '~src/variables';
+@import '~src/mixins';
+
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: $light-accent;
+
+  @include transition();
+  @include box-shadow-1();
+
+  .sidemenu-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .sidemenu-item {
+      padding: 10px;
+      border-bottom: 1px solid $dark-accent;
+      transition: 0.1s all ease-in-out;
+      cursor: pointer;
+
+      fa-icon {
+        transition: 0.1s all ease-in-out;
+        float: right;
+        margin-right: 6px;
+      }
+
+      &:hover {
+        background-color: $grey;
+        border-right: 3px solid $primary;
+
+        fa-icon {
+          color: $primary;
+        }
+      }
+    }
+  }
+}

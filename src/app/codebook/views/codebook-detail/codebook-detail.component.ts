@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, take } from 'rxjs/operators';
 
 import { CodebookService } from 'src/app/services/codebook.service';
 
@@ -12,21 +14,26 @@ import { Codebook as cb } from '../../../models/Codebook';
   templateUrl: './codebook-detail.component.html',
   styleUrls: ['./codebook-detail.component.scss'],
 })
-export class CodebookDetailComponent implements OnInit {
+export class CodebookDetailComponent implements OnInit, OnDestroy {
   public codebook$: Observable<cb.Codebook>;
+  public codebook: cb.Codebook = null;
   public cells$: Observable<cb.Cell[]>;
 
   public codebookId: string;
 
   private routeParamsSubscription: Subscription;
 
-  public ngOnDestroy(): void {
-    this.routeParamsSubscription.unsubscribe();
-  }
+  public titleEditModeActive: boolean = false;
+  public titleEditText: string = '';
+
+  public subscriptions: Subscription = new Subscription();
+
+  public faEdit = faEdit;
 
   constructor(
     private route: ActivatedRoute,
-    private codebookService: CodebookService
+    private codebookService: CodebookService,
+    private toastr: ToastrService
   ) {
     this.routeParamsSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
@@ -37,6 +44,8 @@ export class CodebookDetailComponent implements OnInit {
 
     this.codebook$.pipe(take(1)).subscribe((codebook) => {
       this.codebookId = codebook.id;
+      this.titleEditText = codebook.title;
+      this.codebook = codebook;
     });
   }
 
@@ -44,8 +53,17 @@ export class CodebookDetailComponent implements OnInit {
     this.cells$.pipe(take(3)).subscribe((cells) => console.log(cells));
   }
 
+  ngOnDestroy(): void {
+    this.routeParamsSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
+  }
+
   public onCellDataChanged(newCell: cb.Cell, cellId: string) {
     this.codebookService.updateCodebookCell(this.codebookId, cellId, newCell);
+  }
+
+  public onTitleEditChange(newTitle: string) {
+    this.codebookService.updateCodebookTitle(this.codebookId, newTitle);
   }
 
   /**
@@ -55,5 +73,13 @@ export class CodebookDetailComponent implements OnInit {
    */
   public codebookTrackByFunction(index, item) {
     return item ? item.id : undefined;
+  }
+
+  public onTitleEditButtonClick() {
+    if (this.titleEditText != this.codebook.title) {
+      this.onTitleEditChange(this.titleEditText);
+    }
+
+    this.titleEditModeActive = !this.titleEditModeActive;
   }
 }

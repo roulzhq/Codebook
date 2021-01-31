@@ -3,7 +3,6 @@
 
 :host {
   .cell {
-    margin: 10px 0;
     display: grid;
     grid-column-gap: 10px;
     grid-template-rows: auto auto;
@@ -25,6 +24,10 @@
       
       .cell-input-editor {
         height: 100%;
+
+        .margin {
+          width: 20px
+        }
       }
     }
 
