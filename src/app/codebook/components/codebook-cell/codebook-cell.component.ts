@@ -13,6 +13,7 @@ import { WasmService } from 'src/app/services/wasm.service';
 import { Codebook as cb } from 'src/app/models/Codebook';
 import { ResizedEvent } from 'angular-resize-event';
 import { take } from 'rxjs/operators';
+import { WasmJsVM } from 'src/app/models/WASM';
 
 @Component({
   selector: 'codebook-cell',
@@ -31,6 +32,8 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
       this.pendingChanges = false;
     }
   }
+
+  @Input() private vm: WasmJsVM;
 
   @Output() dataChange: EventEmitter<cb.Cell> = new EventEmitter<cb.Cell>();
 
@@ -101,11 +104,6 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
     clearInterval(this.executionInterval);
   }
 
-  // Getter functions
-  public get cellContent(): string {
-    return this.cell.lines.join('\n');
-  }
-
   public get cellChanged(): boolean {
     return !this.utilService.compareObjects(this.originalCell, this.cell);
   }
@@ -125,7 +123,7 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
    */
   public onCellContentChanged(content: string) {
     // Push the update into the local cell, so it can be saved
-    this.cell.lines = content.split('\n');
+    this.cell.data = content;
     this.registerCellChange();
   }
 
@@ -164,6 +162,6 @@ export class CodebookCellComponent implements OnInit, OnDestroy {
   }
 
   public execute() {
-    this.output = this.wasm.execute(this.cellContent);
+    this.output = this.vm.execute(this.cell.data)
   }
 }

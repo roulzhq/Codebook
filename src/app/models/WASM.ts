@@ -1,5 +1,10 @@
-export type ExecuteCellFunction = (code: string) => string;
+export interface WasmJsVM {
+  execute: (code: string) => string;
+  clear: () => boolean;
+}
+
+export type CreateVmFunction = () => WasmJsVM;
 
 export interface WasmSuite {
-  executeCell: ExecuteCellFunction;
+  createVm: CreateVmFunction;
 }

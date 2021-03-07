@@ -1,23 +1,27 @@
-import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, take } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { WasmService } from 'src/app/services/wasm.service';
 
 import { CodebookService } from 'src/app/services/codebook.service';
 
 import { Codebook as cb } from '../../../models/Codebook';
+import { WasmJsVM } from 'src/app/models/WASM';
 
 @Component({
   selector: 'codebook-detail',
   templateUrl: './codebook-detail.component.html',
   styleUrls: ['./codebook-detail.component.scss'],
 })
-export class CodebookDetailComponent implements OnInit, OnDestroy {
+export class CodebookDetailComponent implements OnDestroy {
   public codebook$: Observable<cb.Codebook>;
   public codebook: cb.Codebook = null;
-  public cells$: Observable<cb.Cell[]>;
+  public cells$: Observable<(cb.Cell)[]>;
+
+  public vm: WasmJsVM;
 
   public codebookId: string;
 
@@ -33,8 +37,14 @@ export class CodebookDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private codebookService: CodebookService,
-    private toastr: ToastrService
+    private wasm: WasmService
   ) {
+    this.wasm.ready.pipe(take(2)).subscribe((ready) => {
+      if (ready) {
+        this.vm = this.wasm.register();
+      }
+    });
+
     this.routeParamsSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
 
@@ -49,10 +59,6 @@ export class CodebookDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-    this.cells$.pipe(take(3)).subscribe((cells) => console.log(cells));
-  }
-
   ngOnDestroy(): void {
     this.routeParamsSubscription.unsubscribe();
     this.subscriptions.unsubscribe();
@@ -60,6 +66,8 @@ export class CodebookDetailComponent implements OnInit, OnDestroy {
 
   public onCellDataChanged(newCell: cb.Cell, cellId: string) {
     this.codebookService.updateCodebookCell(this.codebookId, cellId, newCell);
+
+    return this.vm.execute(newCell.data);
   }
 
   public onTitleEditChange(newTitle: string) {

@@ -57,7 +57,7 @@ export class CodebookService {
     const cellDoc = codebookDoc.collection(`cells`).doc(cellId);
 
     if (cellDoc) {
-      cellDoc.update(cell);
+      return cellDoc.update(cell);
     }
   }
 

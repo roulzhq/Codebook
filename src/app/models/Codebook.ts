@@ -17,7 +17,6 @@ export namespace Codebook {
   export interface Cell {
     id: string;
     type: CellType;
-    lines?: string[];
     data?: string;
     height?: number;
   }

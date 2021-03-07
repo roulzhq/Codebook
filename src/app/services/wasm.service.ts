@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { WasmSuite, ExecuteCellFunction } from '../models/WASM';
+import { CreateVmFunction, WasmJsVM, WasmSuite } from '../models/WASM';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class WasmService {
   public ready: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor() {
-    this.init().then(_ => {      
+    this.init().then((_) => {
       this.ready.next(true);
     });
   }
@@ -21,18 +21,18 @@ export class WasmService {
     let go = new Go();
 
     return WebAssembly.instantiateStreaming(
-      fetch('assets/codebook.wasm'),
+      fetch('assets/Codebook.wasm'),
       go.importObject
     ).then((res) => {
-      go.run(res.instance);
+      go.run(res.instance);      
 
       this.Suite = {
-        executeCell: cb_execute as ExecuteCellFunction,
+        createVm: wasm_create_vm as CreateVmFunction,
       };
     });
   }
-
-  public execute(code: string) {
-    return this.Suite.executeCell(code);
+  
+  public register(): WasmJsVM {
+    return this.Suite.createVm()
   }
 }

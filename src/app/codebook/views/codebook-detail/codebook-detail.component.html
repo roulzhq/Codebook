@@ -30,6 +30,7 @@
         <codebook-cell
           *ngFor="let cell of cells$ | async; trackBy: codebookTrackByFunction"
           [data]="cell"
+          [vm]="vm"
           (dataChange)="onCellDataChanged($event, cell.id)"
           class="codebook-cell"
         ></codebook-cell>
