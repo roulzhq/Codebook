@@ -18,7 +18,7 @@ If you ever used Jupyter notebooks you know that they are just awesome! But I al
 Codebook wants to solve those issues by making it easy to use. You know, like it's 2020
 
 ## Project Structure
-This repo contains only the UI/Frontend of the codebook project. The backend will be developed in another Repo.
+This repo contains only the UI/Frontend of the codebook project. The go/wasm code can be found [HERE](https://github.com/roulzhq/Codebook-runtime-wasm).
 I chose angular because it's easy and go because there is this package [otto](https://github.com/robertkrimen/otto) wich seems to be ideal for the code-execution thing.
 It's also lightweight, fast and can handle a lot websocket connections, and it's awesome!
 
